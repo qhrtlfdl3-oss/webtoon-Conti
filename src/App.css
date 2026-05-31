@@ -600,3 +600,8 @@ hr {
 .canvas-wrap {
   overscroll-behavior: contain;
 }
+html,
+body {
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
