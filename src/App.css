@@ -553,3 +553,43 @@ hr {
 .webtoon-page {
   touch-action: pan-x pan-y;
 }
+/* 모바일 터치용: 크기 조절 핸들 잡기 쉽게 확대 */
+@media (max-width: 768px) {
+  .resize-handle,
+  .panel-corner {
+    width: 34px;
+    height: 34px;
+    z-index: 999999;
+    touch-action: none;
+  }
+
+  .resize-handle {
+    right: -18px;
+    bottom: -18px;
+  }
+
+  .panel-corner.top-left {
+    left: -18px;
+    top: -18px;
+  }
+
+  .panel-corner.top-right {
+    right: -18px;
+    top: -18px;
+  }
+
+  .panel-corner.bottom-left {
+    left: -18px;
+    bottom: -18px;
+  }
+
+  .panel-corner.bottom-right {
+    right: -18px;
+    bottom: -18px;
+  }
+
+  .webtoon-panel,
+  .balloon-group {
+    touch-action: none;
+  }
+}
