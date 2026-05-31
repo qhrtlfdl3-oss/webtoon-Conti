@@ -116,17 +116,17 @@ useEffect(() => {
   }
 
   return {
-    x: PAGE_WIDTH / 2,
-    y: (el.scrollTop + el.clientHeight / 2) / zoom,
-  };
+  x: (el.scrollLeft + el.clientWidth / 2) / zoom,
+  y: (el.scrollTop + el.clientHeight / 2) / zoom,
+};
 };
 
  const center = getVisibleCanvasCenter();
 
 const newPanel = {
   id: Date.now(),
-  x: center.x,
-  y: center.y,
+ x: center.x - 280,
+ y: center.y - 210,
   width: 560,
   height: 420,
 };
@@ -182,8 +182,8 @@ const center = getVisibleCanvasCenter();
       id: Date.now(),
       text: dialogue,
       type: balloonType,
-   x: center.x,
-   y: center.y,
+  x: center.x - 130,
+  y: center.y - 75,
       width: 260,
       height: 150,
     };
