@@ -62,6 +62,17 @@ function Sidebar({
     📂
     <input type="file" accept=".json" onChange={loadProjectFile} hidden />
   </label>
+
+  <label className="tool-icon file-icon" title="TXT 대사 불러오기">
+  📝
+  <input
+    type="file"
+    accept=".txt"
+    onChange={importTextFile}
+    hidden
+  />
+</label>
+
 </div>
       <Navigator
         activePage={activePage}
@@ -98,15 +109,7 @@ function Sidebar({
       />
 
       <button onClick={addBalloon}>말풍선 생성</button>
-      <label className="file-load-button">
-  TXT 대사 불러오기
-  <input
-    type="file"
-    accept=".txt"
-    onChange={importTextFile}
-    hidden
-  />
-</label>
+     
 
       <hr />
 
