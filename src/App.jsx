@@ -105,14 +105,31 @@ useEffect(() => {
     setSelected(null);
   };
 
-  const addPanel = () => {
-    const newPanel = {
-      id: Date.now(),
-      x: 340,
-      y: 420,
-      width: 560,
-      height: 420,
+  const getVisibleCanvasCenter = () => {
+  const el = canvasWrapRef.current;
+
+  if (!el) {
+    return {
+      x: PAGE_WIDTH / 2,
+      y: 400,
     };
+  }
+
+  return {
+    x: PAGE_WIDTH / 2,
+    y: (el.scrollTop + el.clientHeight / 2) / zoom,
+  };
+};
+
+ const center = getVisibleCanvasCenter();
+
+const newPanel = {
+  id: Date.now(),
+  x: center.x,
+  y: center.y,
+  width: 560,
+  height: 420,
+};
 
     setPages((prev) =>
       prev.map((page) =>
@@ -156,6 +173,7 @@ useEffect(() => {
 
     setSelected(null);
   };
+const center = getVisibleCanvasCenter();
 
   const addBalloon = () => {
     if (!dialogue.trim()) return;
@@ -164,8 +182,8 @@ useEffect(() => {
       id: Date.now(),
       text: dialogue,
       type: balloonType,
-      x: 240,
-      y: 260,
+   x: center.x,
+   y: center.y,
       width: 260,
       height: 150,
     };
