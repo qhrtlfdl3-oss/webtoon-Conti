@@ -22,7 +22,9 @@ function App() {
   const pageRefs = useRef({});
   const canvasWrapRef = useRef(null);
   const [activePageId, setActivePageId] = useState(1);
-  const [zoom, setZoom] = useState(1);
+  const [zoom, setZoom] = useState(() => {
+  return window.innerWidth <= 768 ? 0.45 : 1;
+});
   const [scrollInfo, setScrollInfo] = useState({
     scrollTop: 0,
     width: 1,

@@ -53,7 +53,7 @@ function Navigator({
           <div className="zoom-row">
             <input
               type="range"
-              min="30"
+              min="20"
               max="150"
               value={zoom * 100}
               onChange={(e) => setZoom(Number(e.target.value) / 100)}

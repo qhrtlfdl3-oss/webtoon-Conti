@@ -475,7 +475,14 @@ hr {
     overflow-y: auto;
     border-left: 1px solid #ddd;
   }
+  .zoom-stage {
+   transform-origin: top left;
+  }
 
+  .canvas-wrap {
+   overflow: auto;
+  }
+  
   .canvas-wrap {
     height: calc(100vh - 44px);
     padding: 6px;
