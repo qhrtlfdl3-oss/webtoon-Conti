@@ -14,6 +14,9 @@ function CanvasPage({
   startPanelResize,
   startBalloonMove,
   startBalloonResize,
+  handleTouchStart,
+  handleTouchMove,
+  handleTouchEnd,
 }) {
   if (!activePage) return null;
 
@@ -37,6 +40,9 @@ function CanvasPage({
 onPointerUp={stopAction}
 onPointerLeave={stopAction}
 onPointerDown={() => setSelected(null)}
+onTouchStart={handleTouchStart}
+onTouchMove={handleTouchMove}
+onTouchEnd={handleTouchEnd}
       >
         <div className="page-size-label">
           {PAGE_WIDTH} × {PAGE_HEIGHT} px

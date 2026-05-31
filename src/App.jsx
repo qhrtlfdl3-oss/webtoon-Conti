@@ -21,6 +21,7 @@ function App() {
 });
   const pageRefs = useRef({});
   const canvasWrapRef = useRef(null);
+  const pinchRef = useRef(null);
   const [activePageId, setActivePageId] = useState(1);
   const [zoom, setZoom] = useState(() => {
   return window.innerWidth <= 768 ? 0.3 : 1;
@@ -473,6 +474,42 @@ const createNewProject = () => {
   setSelected(null);
   localStorage.removeItem(STORAGE_KEY);
 };
+const getTouchDistance = (touches) => {
+  const dx = touches[0].clientX - touches[1].clientX;
+  const dy = touches[0].clientY - touches[1].clientY;
+  return Math.sqrt(dx * dx + dy * dy);
+};
+
+const handleTouchStart = (e) => {
+  if (e.touches.length !== 2) return;
+
+  e.preventDefault();
+
+  pinchRef.current = {
+    startDistance: getTouchDistance(e.touches),
+    startZoom: zoom,
+  };
+};
+
+const handleTouchMove = (e) => {
+  if (e.touches.length !== 2 || !pinchRef.current) return;
+
+  e.preventDefault();
+
+  const currentDistance = getTouchDistance(e.touches);
+  const scale = currentDistance / pinchRef.current.startDistance;
+  const nextZoom = pinchRef.current.startZoom * scale;
+
+  const minZoom = window.innerWidth <= 768 ? 0.15 : 0.3;
+  const maxZoom = 2;
+
+  setZoom(Math.max(minZoom, Math.min(maxZoom, nextZoom)));
+};
+
+const handleTouchEnd = () => {
+  pinchRef.current = null;
+};
+
   const scrollNavigator = (e) => {
     const nav = e.currentTarget.getBoundingClientRect();
     const yRatio = (e.clientY - nav.top) / nav.height;
@@ -528,6 +565,9 @@ const createNewProject = () => {
   startPanelResize={startPanelResize}
   startBalloonMove={startBalloonMove}
   startBalloonResize={startBalloonResize}
+  handleTouchStart={handleTouchStart}
+  handleTouchMove={handleTouchMove}
+  handleTouchEnd={handleTouchEnd}
 />
         </div>
       </div>

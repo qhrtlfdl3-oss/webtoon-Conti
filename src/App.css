@@ -593,3 +593,10 @@ hr {
     touch-action: none;
   }
 }
+.webtoon-page {
+  touch-action: none;
+}
+
+.canvas-wrap {
+  overscroll-behavior: contain;
+}
