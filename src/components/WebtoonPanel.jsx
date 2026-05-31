@@ -14,7 +14,7 @@ function WebtoonPanel({
         width: panel.width,
         height: panel.height,
       }}
-      onMouseDown={(e) => startPanelMove(e, panel)}
+      onPointerDown={(e) => startPanelMove(e, panel)}
     >
       <div className="panel-number">{index + 1}</div>
 
@@ -22,19 +22,19 @@ function WebtoonPanel({
         <>
           <div
             className="panel-corner top-left"
-            onMouseDown={(e) => startPanelResize(e, panel, "top-left")}
+            onPointerDown={(e) => startPanelResize(e, panel, "top-left")}
           />
           <div
             className="panel-corner top-right"
-            onMouseDown={(e) => startPanelResize(e, panel, "top-right")}
+            onPointerDown={(e) => startPanelResize(e, panel, "top-right")}
           />
           <div
             className="panel-corner bottom-left"
-            onMouseDown={(e) => startPanelResize(e, panel, "bottom-left")}
+            onPointerDown={(e) => startPanelResize(e, panel, "bottom-left")}
           />
           <div
             className="panel-corner bottom-right"
-            onMouseDown={(e) => startPanelResize(e, panel, "bottom-right")}
+            onPointerDown={(e) => startPanelResize(e, panel, "bottom-right")}
           />
         </>
       )}
