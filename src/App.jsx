@@ -356,23 +356,37 @@ const importTextFile = (e) => {
     });
   };
 
-  const startBalloonResize = (e, balloon) => {
-    e.stopPropagation();
-    e.preventDefault();
+  const startBalloonResize = (e, balloon, corner) => {
+  e.stopPropagation();
+  e.preventDefault();
 
-    const mouse = getMousePosition(e);
+  e.currentTarget.setPointerCapture?.(e.pointerId);
 
-    setAction({
-      kind: "balloon",
-      type: "resize",
-      pageId: activePageId,
-      itemId: balloon.id,
-      startMouseX: mouse.x,
-      startMouseY: mouse.y,
-      startWidth: balloon.width,
-      startHeight: balloon.height,
-    });
-  };
+  const mouse = getMousePosition(e);
+
+  setSelected({
+    type: "balloon",
+    pageId: activePageId,
+    itemId: balloon.id,
+  });
+
+  setAction({
+    kind: "balloon",
+    type: "resize",
+    pageId: activePageId,
+    itemId: balloon.id,
+    corner,
+
+    startMouseX: mouse.x,
+    startMouseY: mouse.y,
+
+    startX: balloon.x,
+    startY: balloon.y,
+
+    startWidth: balloon.width,
+    startHeight: balloon.height,
+  });
+};
 
   const onMouseMove = (e) => {
     if (!action) return;
@@ -431,18 +445,40 @@ const importTextFile = (e) => {
         });
       }
 
-      if (action.type === "resize") {
-        updateBalloon(action.pageId, action.itemId, {
-          width: Math.max(
-            80,
-            action.startWidth + (mouse.x - action.startMouseX)
-          ),
-          height: Math.max(
-            50,
-            action.startHeight + (mouse.y - action.startMouseY)
-          ),
-        });
-      }
+if (action.type === "resize") {
+  const dx = mouse.x - action.startMouseX;
+  const dy = mouse.y - action.startMouseY;
+
+  let newX = action.startX;
+  let newY = action.startY;
+  let newWidth = action.startWidth;
+  let newHeight = action.startHeight;
+
+  if (action.corner.includes("right")) {
+    newWidth = action.startWidth + dx;
+  }
+
+  if (action.corner.includes("left")) {
+    newWidth = action.startWidth - dx;
+    newX = action.startX + dx / 2;
+  }
+
+  if (action.corner.includes("bottom")) {
+    newHeight = action.startHeight + dy;
+  }
+
+  if (action.corner.includes("top")) {
+    newHeight = action.startHeight - dy;
+    newY = action.startY + dy / 2;
+  }
+
+  updateBalloon(action.pageId, action.itemId, {
+    x: newX,
+    y: newY,
+    width: Math.max(80, newWidth),
+    height: Math.max(50, newHeight),
+  });
+}
     }
   };
 

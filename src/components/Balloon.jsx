@@ -29,10 +29,26 @@ function Balloon({
       <div className="balloon-text">{balloon.text}</div>
 
       {isSelected && (
-        <div
-          className="resize-handle"
-          onPointerDown={(e) => startBalloonResize(e, balloon)}
-        />
+        <>
+          <div
+            className="resize-handle top-left"
+            onPointerDown={(e) => startBalloonResize(e, balloon, "top-left")}
+          />
+          <div
+            className="resize-handle top-right"
+            onPointerDown={(e) => startBalloonResize(e, balloon, "top-right")}
+          />
+          <div
+            className="resize-handle bottom-left"
+            onPointerDown={(e) => startBalloonResize(e, balloon, "bottom-left")}
+          />
+          <div
+            className="resize-handle bottom-right"
+            onPointerDown={(e) =>
+              startBalloonResize(e, balloon, "bottom-right")
+            }
+          />
+        </>
       )}
     </div>
   );
