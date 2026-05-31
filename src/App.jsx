@@ -128,26 +128,27 @@ const getVisibleCanvasCenter = () => {
   };
 };
 
-const center = getVisibleCanvasCenter();
+const addPanel = () => {
+  const center = getVisibleCanvasCenter();
 
-const newBalloon = {
-  id: Date.now(),
-  text: dialogue,
-  type: balloonType,
-  x: center.x - 130,
-  y: center.y - 75,
-  width: 260,
-  height: 150,
-};
-
-    setPages((prev) =>
-      prev.map((page) =>
-        page.id === activePageId
-          ? { ...page, panels: [...page.panels, newPanel] }
-          : page
-      )
-    );
+  const newPanel = {
+    id: Date.now(),
+    x: center.x - 280,
+    y: center.y - 210,
+    width: 560,
+    height: 420,
   };
+
+  setPages((prev) =>
+    prev.map((page) =>
+      page.id === activePageId
+        ? { ...page, panels: [...page.panels, newPanel] }
+        : page
+    )
+  );
+
+  setSelected(null);
+};
 
   const updatePanel = (pageId, panelId, changes) => {
     setPages((prev) =>
