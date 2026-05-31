@@ -432,7 +432,7 @@ const importTextFile = (e) => {
           x: newX,
           y: newY,
           width: Math.max(80, newWidth),
-          height: Math.max(80, newHeight),
+          height: Math.max(4, newHeight),
         });
       }
     }
