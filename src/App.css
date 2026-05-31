@@ -482,7 +482,7 @@ hr {
   .canvas-wrap {
    overflow: auto;
   }
-  
+
   .canvas-wrap {
     height: calc(100vh - 44px);
     padding: 6px;
@@ -542,4 +542,14 @@ hr {
   .sidebar textarea {
     height: 80px;
   }
+}
+.webtoon-panel,
+.balloon-group,
+.panel-corner,
+.resize-handle {
+  touch-action: none;
+}
+
+.webtoon-page {
+  touch-action: pan-x pan-y;
 }

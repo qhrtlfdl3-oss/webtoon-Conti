@@ -33,10 +33,10 @@ function CanvasPage({
         style={{
           transform: `scale(${zoom})`,
         }}
-        onMouseMove={onMouseMove}
-        onMouseUp={stopAction}
-        onMouseLeave={stopAction}
-        onMouseDown={() => setSelected(null)}
+       onPointerMove={onMouseMove}
+onPointerUp={stopAction}
+onPointerLeave={stopAction}
+onPointerDown={() => setSelected(null)}
       >
         <div className="page-size-label">
           {PAGE_WIDTH} × {PAGE_HEIGHT} px

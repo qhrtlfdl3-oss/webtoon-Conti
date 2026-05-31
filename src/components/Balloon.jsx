@@ -15,20 +15,23 @@ function Balloon({
         width: balloon.width,
         height: balloon.height,
       }}
-      onMouseDown={(e) => startBalloonMove(e, balloon)}
+      onPointerDown={(e) => startBalloonMove(e, balloon)}
     >
-      <img
-        className="balloon-img"
-        src={BALLOON_IMAGES[balloon.type]}
-        alt=""
-      />
+      {balloon.type !== "text" && (
+        <img
+          className="balloon-img"
+          src={BALLOON_IMAGES[balloon.type]}
+          alt=""
+          draggable={false}
+        />
+      )}
 
       <div className="balloon-text">{balloon.text}</div>
 
       {isSelected && (
         <div
           className="resize-handle"
-          onMouseDown={(e) => startBalloonResize(e, balloon)}
+          onPointerDown={(e) => startBalloonResize(e, balloon)}
         />
       )}
     </div>
