@@ -105,30 +105,39 @@ useEffect(() => {
     setSelected(null);
   };
 
-  const getVisibleCanvasCenter = () => {
-  const el = canvasWrapRef.current;
+const getVisibleCanvasCenter = () => {
+  const pageEl = pageRefs.current[activePageId];
+  const wrapEl = canvasWrapRef.current;
 
-  if (!el) {
+  if (!pageEl || !wrapEl) {
     return {
       x: PAGE_WIDTH / 2,
       y: 400,
     };
   }
 
+  const pageRect = pageEl.getBoundingClientRect();
+  const wrapRect = wrapEl.getBoundingClientRect();
+
+  const screenCenterX = wrapRect.left + wrapRect.width / 2;
+  const screenCenterY = wrapRect.top + wrapRect.height / 2;
+
   return {
-  x: (el.scrollLeft + el.clientWidth / 2) / zoom,
-  y: (el.scrollTop + el.clientHeight / 2) / zoom,
-};
+    x: (screenCenterX - pageRect.left) / zoom,
+    y: (screenCenterY - pageRect.top) / zoom,
+  };
 };
 
- const center = getVisibleCanvasCenter();
+const center = getVisibleCanvasCenter();
 
-const newPanel = {
+const newBalloon = {
   id: Date.now(),
- x: center.x - 280,
- y: center.y - 210,
-  width: 560,
-  height: 420,
+  text: dialogue,
+  type: balloonType,
+  x: center.x - 130,
+  y: center.y - 75,
+  width: 260,
+  height: 150,
 };
 
     setPages((prev) =>
