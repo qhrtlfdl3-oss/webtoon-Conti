@@ -208,6 +208,50 @@ const center = getVisibleCanvasCenter();
 
     setDialogue("");
   };
+const importTextFile = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = (event) => {
+    const text = event.target.result;
+
+    const blocks = text
+      .split(/\n\s*\n/)
+      .map((block) => block.trim())
+      .filter(Boolean);
+
+    if (blocks.length === 0) {
+      alert("불러올 대사가 없습니다.");
+      return;
+    }
+
+    const center = getVisibleCanvasCenter();
+
+    const newBalloons = blocks.map((block, index) => ({
+      id: Date.now() + index,
+      text: block,
+      type: balloonType,
+      x: center.x - 130,
+      y: center.y - 75 + index * 190,
+      width: 260,
+      height: 150,
+    }));
+
+    setPages((prev) =>
+      prev.map((page) =>
+        page.id === activePageId
+          ? { ...page, balloons: [...page.balloons, ...newBalloons] }
+          : page
+      )
+    );
+
+    e.target.value = "";
+  };
+
+  reader.readAsText(file, "UTF-8");
+};
 
   const updateBalloon = (pageId, balloonId, changes) => {
     setPages((prev) =>
@@ -620,6 +664,7 @@ const handleTouchEnd = () => {
         dialogue={dialogue}
         setDialogue={setDialogue}
         addBalloon={addBalloon}
+        importTextFile={importTextFile}
         selectedBalloon={selectedBalloon}
         selectedPanel={selectedPanel}
         selected={selected}

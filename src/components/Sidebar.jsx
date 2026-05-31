@@ -22,6 +22,7 @@ function Sidebar({
   dialogue,
   setDialogue,
   addBalloon,
+  importTextFile,
 
   selectedBalloon,
   selectedPanel,
@@ -97,6 +98,15 @@ function Sidebar({
       />
 
       <button onClick={addBalloon}>말풍선 생성</button>
+      <label className="file-load-button">
+  TXT 대사 불러오기
+  <input
+    type="file"
+    accept=".txt"
+    onChange={importTextFile}
+    hidden
+  />
+</label>
 
       <hr />
 
