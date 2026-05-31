@@ -557,8 +557,8 @@ hr {
 @media (max-width: 768px) {
   .resize-handle,
   .panel-corner {
-    width: 34px;
-    height: 34px;
+    width: 42px;
+    height: 42px;
     z-index: 999999;
     touch-action: none;
   }
