@@ -457,36 +457,82 @@ hr {
 }
 @media (max-width: 768px) {
   .app {
-    display: flex;
     flex-direction: row;
+    height: 100vh;
+    overflow: hidden;
   }
 
   .main-area {
-    width: 70%;
+    width: 64vw;
+    height: 100vh;
+    min-width: 0;
   }
 
   .sidebar {
-    width: 30%;
-    min-width: 140px;
+    width: 36vw;
+    height: 100vh;
+    padding: 8px;
+    overflow-y: auto;
+    border-left: 1px solid #ddd;
+  }
+
+  .canvas-wrap {
+    height: calc(100vh - 44px);
     padding: 6px;
+    overflow: auto;
+  }
+
+  .zoom-stage {
+    margin: 0 auto 40px;
+  }
+
+  .webtoon-page {
+    transform-origin: top left;
+  }
+
+  .toolbar-row {
+    justify-content: center;
+    gap: 4px;
   }
 
   .tool-icon {
-    width: 28px;
-    height: 28px;
-    font-size: 14px;
+    width: 34px;
+    height: 34px;
+    font-size: 17px;
   }
 
-  .sidebar h3 {
-    font-size: 14px;
-  }
-
-  .sidebar textarea {
-    height: 60px;
+  .navigator-box.small {
+    width: 100%;
   }
 
   .navigator-preview.small {
-    width: 40px;
-    height: 75px;
+    width: 18px;
+    height: 160px;
+    margin: 6px auto;
+  }
+
+  .zoom-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 28px 24px;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .zoom-row input[type="range"] {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .zoom-percent {
+    width: 28px;
+    font-size: 11px;
+  }
+
+  .sidebar h3 {
+    font-size: 16px;
+  }
+
+  .sidebar textarea {
+    height: 80px;
   }
 }
