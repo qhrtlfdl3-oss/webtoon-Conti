@@ -126,7 +126,6 @@ body {
 
 .webtoon-panel {
   position: absolute;
-  transform: translate(-50%, -50%);
   background: #f7f7f7;
   border: 3px solid #111;
   cursor: move;
@@ -678,4 +677,33 @@ body {
   font-size: 12px;
   margin-bottom: 10px;
   color: #666;
+}
+.balloon-text-top-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+}
+
+.balloon-text-only {
+  position: absolute;
+  box-sizing: border-box;
+
+  padding: 8%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  white-space: pre-wrap;
+  word-break: keep-all;
+  overflow: hidden;
+
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #665c73;
+
+  pointer-events: none;
 }

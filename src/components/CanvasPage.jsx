@@ -36,13 +36,13 @@ function CanvasPage({
         style={{
           transform: `scale(${zoom})`,
         }}
-       onPointerMove={onMouseMove}
-onPointerUp={stopAction}
-onPointerLeave={stopAction}
-onPointerDown={() => setSelected(null)}
-onTouchStart={handleTouchStart}
-onTouchMove={handleTouchMove}
-onTouchEnd={handleTouchEnd}
+        onPointerMove={onMouseMove}
+        onPointerUp={stopAction}
+        onPointerLeave={stopAction}
+        onPointerDown={() => setSelected(null)}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <div className="page-size-label">
           {PAGE_WIDTH} × {PAGE_HEIGHT} px
@@ -80,9 +80,27 @@ onTouchEnd={handleTouchEnd}
               isSelected={isSelected}
               startBalloonMove={startBalloonMove}
               startBalloonResize={startBalloonResize}
+              showText={false}
             />
           );
         })}
+
+        <div className="balloon-text-top-layer">
+          {activePage.balloons.map((balloon) => (
+            <div
+  key={`text-${balloon.id}`}
+  className="balloon-text-only"
+  style={{
+    left: balloon.x,
+    top: balloon.y,
+    width: balloon.width,
+    height: balloon.height,
+  }}
+>
+              {balloon.text}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

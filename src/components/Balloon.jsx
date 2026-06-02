@@ -6,10 +6,11 @@ function Balloon({
   isSelected,
   startBalloonMove,
   startBalloonResize,
+  showText = true,
 }) {
   const getVisibleBox = (item) => {
-    const insetX = item.width * 0.10;
-    const insetY = item.height * 0.10;
+    const insetX = item.width * 0.1;
+    const insetY = item.height * 0.1;
 
     return {
       left: item.x + insetX,
@@ -80,14 +81,7 @@ function Balloon({
         );
       })}
 
-      <div
-  className="balloon-text"
-  style={{
-    zIndex: 999,
-  }}
->
-  {balloon.text}
-</div>
+      {showText && <div className="balloon-text">{balloon.text}</div>}
 
       {isSelected && (
         <>
