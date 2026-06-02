@@ -2,10 +2,47 @@ import { BALLOON_IMAGES } from "../constants";
 
 function Balloon({
   balloon,
+  allBalloons,
   isSelected,
   startBalloonMove,
   startBalloonResize,
 }) {
+  const getVisibleBox = (item) => {
+    const insetX = item.width * 0.10;
+    const insetY = item.height * 0.10;
+
+    return {
+      left: item.x + insetX,
+      top: item.y + insetY,
+      right: item.x + item.width - insetX,
+      bottom: item.y + item.height - insetY,
+    };
+  };
+
+  const overlapMasks =
+    balloon.maskOverlap && allBalloons
+      ? allBalloons
+          .filter((other) => other.id !== balloon.id)
+          .map((other) => {
+            const a = getVisibleBox(balloon);
+            const b = getVisibleBox(other);
+
+            const left = Math.max(a.left, b.left);
+            const top = Math.max(a.top, b.top);
+            const right = Math.min(a.right, b.right);
+            const bottom = Math.min(a.bottom, b.bottom);
+
+            if (right <= left || bottom <= top) return null;
+
+            return {
+              id: other.id,
+              centerX: left - balloon.x + (right - left) / 2,
+              centerY: top - balloon.y + (bottom - top) / 2,
+            };
+          })
+          .filter(Boolean)
+      : [];
+
   return (
     <div
       className={`balloon-group ${isSelected ? "selected" : ""}`}
@@ -26,7 +63,31 @@ function Balloon({
         />
       )}
 
-      <div className="balloon-text">{balloon.text}</div>
+      {overlapMasks.map((mask) => {
+        const size = balloon.maskSize || 70;
+
+        return (
+          <div
+            key={mask.id}
+            className="overlap-circle"
+            style={{
+              width: size,
+              height: size,
+              left: mask.centerX - size / 2,
+              top: mask.centerY - size / 2,
+            }}
+          />
+        );
+      })}
+
+      <div
+  className="balloon-text"
+  style={{
+    zIndex: 999,
+  }}
+>
+  {balloon.text}
+</div>
 
       {isSelected && (
         <>

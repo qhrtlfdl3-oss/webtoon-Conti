@@ -76,6 +76,7 @@ onTouchEnd={handleTouchEnd}
             <Balloon
               key={balloon.id}
               balloon={balloon}
+              allBalloons={activePage.balloons}
               isSelected={isSelected}
               startBalloonMove={startBalloonMove}
               startBalloonResize={startBalloonResize}

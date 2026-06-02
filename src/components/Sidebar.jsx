@@ -107,7 +107,39 @@ function Sidebar({
               })
             }
           />
+<label className="checkbox-row">
+  <input
+    type="checkbox"
+    checked={selectedBalloon.maskOverlap || false}
+    onChange={(e) =>
+      updateBalloon(selected.pageId, selected.itemId, {
+        maskOverlap: e.target.checked,
+      })
+    }
+  />
+  겹친 선 지우기
+</label>
 
+{selectedBalloon.maskOverlap && (
+  <>
+    <label>마스크 크기</label>
+    <input
+      type="range"
+      min="20"
+      max="150"
+      value={selectedBalloon.maskSize || 70}
+      onChange={(e) =>
+        updateBalloon(selected.pageId, selected.itemId, {
+          maskSize: Number(e.target.value),
+        })
+      }
+    />
+
+    <div className="slider-value">
+      {selectedBalloon.maskSize || 70}px
+    </div>
+  </>
+)}
           <label>말풍선 종류</label>
           <select
             value={selectedBalloon.type}
